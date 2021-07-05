@@ -23,8 +23,7 @@ const MyPosts = (props) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement}
-                              value={props.newPostText}/>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={onAddPost} >Add post</button>
@@ -38,4 +37,4 @@ const MyPosts = (props) => {
     )
 }
 
-export default MyPosts
+export default MyPosts;

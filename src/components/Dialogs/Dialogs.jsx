@@ -31,7 +31,7 @@ const Dialogs = (props) => {
             <div className={s.sendMessage}>
                 <div>
                     <textarea placeholder="Enter your message" value={newMessageBody}
-                              onChange={onNewMessageChange}></textarea>
+                              onChange={onNewMessageChange}> </textarea>
                 </div>
                 <div>
                     <button onClick={onSendMessageClick}>Send</button>
