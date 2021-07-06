@@ -1,13 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState =  {
-     users: [
-             // {id: 1, photoUrl: "https://едем.рф/upload/thumbs/2020/10/05/2e0ff17ee6e225f4ca1c7829fb4dbd3e-256x256-crop.jpg", followed: false, fullName: "Dmitry", status: "I am s boss", location: {city: "Minsk", country: "Belarus"} },
-             // {id: 2, photoUrl: "https://едем.рф/upload/thumbs/2020/10/05/2e0ff17ee6e225f4ca1c7829fb4dbd3e-256x256-crop.jpg", followed: true,  fullName: "Sasha", status: "I am s boss too", location: {city: "Moscow", country: "Russia"} },
-             // {id: 3, photoUrl: "https://едем.рф/upload/thumbs/2020/10/05/2e0ff17ee6e225f4ca1c7829fb4dbd3e-256x256-crop.jpg", followed: false,  fullName: "Andrew", status: "I am s boss too", location: {city: "Kiev", country: "Ukraine"} },
-             ]
+    users: [ ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -33,7 +34,13 @@ const usersReducer = (state = initialState, action) => {
                 } )
             }
         case SET_USERS: {
-            return { ...state, users: [...state.users, ...action.users]}
+            return { ...state, users: action.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.count }
         }
         default:
             return state;
@@ -43,5 +50,7 @@ const usersReducer = (state = initialState, action) => {
 export const followAC = (userId) => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsersAC = (users) => ({ type: SET_USERS, users })
+export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count : totalUsersCount})
 
 export default usersReducer;
