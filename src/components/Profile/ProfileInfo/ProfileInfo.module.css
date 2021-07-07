@@ -5,3 +5,8 @@ img {
     height: 400px;
     width: 1200px;
 }
+
+.profilePhoto {
+    width: 300px;
+    height: 300px;
+}
