@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/preloader/Preloader";
-import userPhoto from "../../../assets/images/user.png";
 import ProfileStatus from "./ProfileStatus";
 
 
@@ -17,8 +16,8 @@ const ProfileInfo = (props) => {
                 <img src="http://demo.holathemes.com/simplest-html/assets/images/avatars/profile-cover.jpg" />
             </div>*/}
             <div className={styles.descriptionBlock}>
-                <img  className={styles.profilePhoto} src={props.profile.photos.large} />
-                <ProfileStatus status={"Hello my friends!"} />
+                <img  className={styles.profilePhoto} src={props.profile.photos.large} alt={""}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <div>
                     Обо мне: {props.profile.aboutMe}
                 </div>
