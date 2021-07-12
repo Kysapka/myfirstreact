@@ -1,9 +1,11 @@
 .dialogs {
+
     display: grid;
     grid-template-columns: 2fr 10fr;
 }
 
 .dialogsItems {
+
     padding: 10px;
     color: white;
 }
@@ -30,4 +32,11 @@
 
 .sendMessage {
     margin-left: 50px;
+}
+.error {
+    color: red;
+}
+
+.fielderror {
+    border: solid red 3px;
 }
