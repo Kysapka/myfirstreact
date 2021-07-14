@@ -1,33 +1,48 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import s from "./login.module.css";
+import connect from "react-redux/lib/connect/connect";
+import {login} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
 
-const onSubmit = (formData) => {
-    console.log(formData);
-}
 
-const Login = () => (
+
+
+
+const Login = (props) => {
+
+    const onSubmit = (formData) => {
+        props.login(formData.email, formData.password, formData.rememberMe );
+
+    }
+
+    if (props.isAuth) {
+        return <Redirect to={"/profile"} />
+    }
+    return (
     <div>
         <Formik
-            initialValues={{ myLogin: '', password: '', rememberMe: '' }}
+            initialValues={{email: '', password: '', rememberMe: ''}}
             validate={values => {
                 const errors = {};
-                if (!values.myLogin) {
-                    errors.myLogin = 'Enter you login please';
+                if (!values.email) {
+                    errors.email = 'Required';
+                } else if (
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                    errors.email = 'Invalid email address';
                 }
                 if (!values.password) {
                     errors.password = 'Enter you password please';
                 }
-                if (values.myLogin.length > 10) {
-                    errors.myLogin = 'Max 10 symbols';
-                }
+
                 return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
-                    let formData = values;
-                     onSubmit(formData);
-                    setSubmitting(false);
+            onSubmit={(values, {setSubmitting}) => {
+                let formData = values;
+                onSubmit(formData);
+                setSubmitting(false);
             }}
         >
             {({
@@ -39,18 +54,20 @@ const Login = () => (
                   handleSubmit,
                   isSubmitting
               }) => (
+
                 <Form onSubmit={handleSubmit}>
+                    <h1>Login</h1>
                     <div>
                         <Field
-                            className={(errors.myLogin && touched.myLogin && errors.myLogin) ? s.fielderror : ""}
+                            className={(errors.email && touched.email && errors.email) ? s.fielderror : ""}
                             type="text"
-                            name="myLogin"
+                            name="email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.login}
                         />
                     </div>
-                    <span className={s.error}>{errors.myLogin && touched.myLogin && errors.myLogin}</span>
+                    <span className={s.error}>{errors.email && touched.email && errors.email}</span>
                     <div>
                         <Field
                             className={(errors.password && touched.password && errors.password) ? s.fielderror : ""}
@@ -79,6 +96,9 @@ const Login = () => (
             )}
         </Formik>
     </div>
-);
-
-export default Login;
+    )
+};
+const mapStateToProps = (state) => ({
+        isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {login} )(Login);
