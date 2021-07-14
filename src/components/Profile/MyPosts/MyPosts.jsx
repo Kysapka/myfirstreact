@@ -2,11 +2,12 @@ import React from 'react';
 import s from "./MyPosts.module.css";
 import Post from './Post/Post';
 import {Field, Form, Formik} from "formik";
-import {Textarea} from "../../common/FormsControl/Textarea";
 
-const MyPosts = (props) => {
 
-    let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}  />);
+function MyPosts(props) {
+    let postsElement =
+        [...props.posts].reverse().map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+
 
     const onAddPost = (values) => {
         props.addPost(values.newPostText);
@@ -54,7 +55,8 @@ const MyPosts = (props) => {
                                         value={values.newPostText}
                                     />
                                 </div>
-                                <span className={s.error}> {errors.newPostText && touched.newPostText && errors.newPostText}</span>
+                                <span
+                                    className={s.error}> {errors.newPostText && touched.newPostText && errors.newPostText}</span>
                                 <div>
                                     <button type="submit" disabled={isSubmitting}>
                                         Add Post
