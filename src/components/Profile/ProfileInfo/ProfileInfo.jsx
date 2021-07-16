@@ -13,9 +13,6 @@ const ProfileInfo = (props) => {
 
      return (
         <div>
-{/*           <div>
-                <img src="http://demo.holathemes.com/simplest-html/assets/images/avatars/profile-cover.jpg" />
-            </div>*/}
             <div className={styles.descriptionBlock}>
                 <img  className={styles.profilePhoto} src={props.profile.photos.large} alt={""}/>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
