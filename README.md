@@ -1,2 +1,1 @@
-# myfirstreact
-I am learn node.js this is me lesson
+RELEASE PROJECT: https://kysapka.github.io/myfirstreact
