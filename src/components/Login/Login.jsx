@@ -12,10 +12,9 @@ import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
 
-    const onSubmit = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe );
-
-    }
+    // const onSubmit = (formData) => {
+    //     props.login(formData.email, formData.password, formData.rememberMe );
+    // }
 
     if (props.isAuth) {
         return <Redirect to={"/profile"} />
@@ -25,7 +24,7 @@ const Login = (props) => {
         <Formik
             initialValues={{email: '', password: '', rememberMe: ''}}
             validate={values => {
-                const errors = {};
+                const errors = {email: '', password: '', rememberMe: ''};
                 if (!values.email) {
                     errors.email = 'Required';
                 } else if (
@@ -41,7 +40,8 @@ const Login = (props) => {
             }}
             onSubmit={(values, {setSubmitting}) => {
                 let formData = values;
-                onSubmit(formData);
+                console.log(formData)
+                // onSubmit(formData);
                 setSubmitting(false);
             }}
         >
