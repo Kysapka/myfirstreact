@@ -12,9 +12,9 @@ import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
 
-    // const onSubmit = (formData) => {
-    //     props.login(formData.email, formData.password, formData.rememberMe );
-    // }
+    const onSubmit = (formData) => {
+        props.login(formData.email, formData.password, formData.rememberMe );
+    }
 
     if (props.isAuth) {
         return <Redirect to={"/profile"} />
@@ -24,9 +24,9 @@ const Login = (props) => {
         <Formik
             initialValues={{email: '', password: '', rememberMe: ''}}
             validate={values => {
-                const errors = {email: '', password: '', rememberMe: ''};
+                const errors = {};
                 if (!values.email) {
-                    errors.email = 'Required';
+                    errors.email = 'email required';
                 } else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
@@ -40,9 +40,8 @@ const Login = (props) => {
             }}
             onSubmit={(values, {setSubmitting}) => {
                 let formData = values;
-                console.log(formData)
-                // onSubmit(formData);
-                setSubmitting(false);
+                onSubmit(formData);
+                setSubmitting(true);
             }}
         >
             {({
@@ -59,7 +58,7 @@ const Login = (props) => {
                     <h1>Login</h1>
                     <div>
                         <Field
-                            className={(errors.email && touched.email && errors.email) ? s.fielderror : ""}
+                            className={(errors.email || touched.email) ? s.fielderror : ""}
                             type="text"
                             name="email"
                             onChange={handleChange}
@@ -67,10 +66,10 @@ const Login = (props) => {
                             value={values.login}
                         />
                     </div>
-                    <span className={s.error}>{errors.email && touched.email && errors.email}</span>
+                    <span className={s.error}>{errors.email || touched.email}</span>
                     <div>
                         <Field
-                            className={(errors.password && touched.password && errors.password) ? s.fielderror : ""}
+                            className={(errors.password || touched.password) ? s.fielderror : ""}
                             type="password"
                             name="password"
                             onChange={handleChange}
@@ -78,7 +77,7 @@ const Login = (props) => {
                             value={values.password}
                         />
                     </div>
-                    <span className={s.error}>{errors.password && touched.password && errors.password}</span>
+                    <span className={s.error}>{errors.password || touched.password}</span>
                     <div>
                         <button type="submit" disabled={isSubmitting}>
                             Login
