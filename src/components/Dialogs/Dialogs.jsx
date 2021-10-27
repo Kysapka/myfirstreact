@@ -27,7 +27,6 @@ export const Dialogs = (props) => {
                 </div>
             </div>
 
-
             <Formik
                 initialValues={{message: ''}}
                 validate={values => {
