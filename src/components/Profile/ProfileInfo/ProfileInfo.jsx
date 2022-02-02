@@ -12,6 +12,7 @@ const ProfileInfo = (props) => {
     }
 const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
+        console.log(e.target.files)
        props.savePhoto(e.target.files[0]);
    }
 }
