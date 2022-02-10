@@ -13,7 +13,6 @@ export const Dialogs = (props) => {
     if (!props.isAuth) return <Redirect to={"/Login"}/>;
 
     const addNewMessage = (values) => {
-        
         props.sendMessage(values.message);
     }
 
